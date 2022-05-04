@@ -32,20 +32,23 @@ fn main() {
        br: String::from("br")
    };
 
-   loop {
-       loop {
+   loop {  //main game loop
+       loop {  //player loop
+//display the board
             println!("_{}_|_{}_|_{}_", position.tl, position.tc, position.tr);
             println!("_{}_|_{}_|_{}_", position.cl, position.cc, position.cr);
             println!("_{}_|_{}_|_{}_", position.bl, position.bc, position.br);
             println!("select your space my entering the appropriate space designation...");
 
-            let mut player = String::new();
+            let mut player = String::new(); //create the player variable
 
-            io::stdin()
+            io::stdin()  //take the paly input
                 .read_line(&mut player)
                 .expect("failed to read line");
 
-            let player = player.trim();
+            let player = player.trim();  //remove any whitespace from the input
+
+//adding player entry to the board space
 
             if player == "tl" && &position.tl != "_X" && &position.tl != "O_" {
                 position.tl = String::from("_X");
@@ -104,11 +107,13 @@ fn main() {
             println!("You win...This time...");
             break;
         }
-    //computer turn
+    //computer turn loop
         loop {
-            let me: Vec<_> = available 
-                .choose_multiple(&mut rand::thread_rng(), 1)
+            let me: Vec<_> = available   //create computer space variable
+                .choose_multiple(&mut rand::thread_rng(), 1)  //select a space from the vector containg board spaces
                 .collect();
+
+//place the computers selection on the board
 
             if me[0] == &"tl" && &position.tl != "_X" && &position.tl != "O_" {
                 position.tl = String::from("O_");
@@ -169,7 +174,8 @@ fn main() {
             break;
         }
    }
-    println!("_{}_|_{}_|_{}_", position.tl, position.tc, position.tr);
+ //display the board
+   println!("_{}_|_{}_|_{}_", position.tl, position.tc, position.tr);
     println!("_{}_|_{}_|_{}_", position.cl, position.cc, position.cr);
     println!("_{}_|_{}_|_{}_", position.bl, position.bc, position.br);
 }
